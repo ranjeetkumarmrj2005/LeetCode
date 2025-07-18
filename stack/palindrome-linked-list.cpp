@@ -1,32 +1,33 @@
 class Solution {
 public:
-      ListNode* reverseList(ListNode* head) {
-       if(head==NULL || head->next==NULL) return head;
-       ListNode* newHead=reverseList(head->next);
-       head->next->next=head;
-       head->next=NULL;
-       return newHead;
+ListNode* reverseList(ListNode* head) {
+        ListNode* CURR=head;
+        ListNode* PREV=NULL;
+        ListNode* NEXT=head;
+        while(CURR){
+            NEXT=NEXT->next;
+            CURR->next=PREV;
+            PREV=CURR;
+            CURR=NEXT;
+        }
+       return PREV;
     }
     bool isPalindrome(ListNode* head) {
         if(head->next==NULL) return true;
-        ListNode* c=new ListNode(-1);
-        ListNode* newHead=c;
-        ListNode* temp=head;
-        while(temp){
-           ListNode* Node=new ListNode(temp->val);
-           c->next=Node;
-           c=c->next;
-           temp=temp->next;
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast->next!=NULL && fast->next->next!=NULL){
+           slow=slow->next;// left middle
+           fast=fast->next->next;
         }
-        c->next=NULL;
-        c=c->next;
-        newHead=newHead->next;
-        temp=head;
-        c=reverseList(newHead);
-        while(c){
-            if(c->val!=temp->val) return false;
-            c=c->next;
-            temp=temp->next;
+        ListNode* newHead=reverseList(slow->next);
+        ListNode* a =head;
+        ListNode* b =newHead;
+
+        while(b){
+            if(a->val!=b->val) return false;
+            a=a->next;
+            b=b->next;
         }
         return true;
     }
