@@ -29,11 +29,12 @@ public:
             n++;
             temp=temp->next;
         }     
-        a->next=NULL;
+        if(a!=NULL) a->next=NULL;
         c->next=NULL;   
         c=reverseList(b);
-        a->next=c;
+        if(a!=NULL) a->next=c;
         b->next=d;
-        return head;
+        if(a) return head;
+        else return c;
     }
 };
