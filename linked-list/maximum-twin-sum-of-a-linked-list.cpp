@@ -1,32 +1,34 @@
 
 class Solution {
 public:
-    ListNode* getNodeAtIdx(ListNode* head,int j){
-        ListNode* temp=head;
-        for(int i=0;i<j;i++){
-            temp=temp->next;
+    ListNode* reverseList(ListNode* head) {
+        ListNode* CURR=head;
+        ListNode* PREV=NULL;
+        ListNode* NEXT=head;
+        while(CURR){
+            NEXT=NEXT->next;
+            CURR->next=PREV;
+            PREV=CURR;
+            CURR=NEXT;
         }
-        return temp;
+        return PREV;
     }
     int pairSum(ListNode* head) {
-        ListNode* temp=head;
-        int size=0;
-        while(temp&&temp->next){
-            temp=temp->next->next;
-            size+=2;
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast&&fast->next){
+            slow=slow->next;
+            fast=fast->next->next;
         }
-        temp=head;
-        int i=0;
-        int j=size-1;
+        fast=reverseList(slow);
+        slow=head;
         int sum=0;
         int maxpairsum=0;
-        while(i<j){
-            ListNode* right=getNodeAtIdx(head,j);
-            sum=temp->val+right->val;
+        while(fast){
+            sum=slow->val+fast->val;
             if(sum>maxpairsum) maxpairsum=sum;
-            temp=temp->next;
-            i++;
-            j--;
+            slow=slow->next;
+            fast=fast->next;
         }
         return maxpairsum;
     }
