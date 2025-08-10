@@ -1,19 +1,16 @@
 class Solution {
 public:
-    int singleNumber(vector<int>& nums){
-        int n=nums.size();
-        for(int i=0;i<n;i++){
-               int x=0;
-            for(int j=0;j<n;j++){
-                if(i==j) continue;
-                if(nums[i]==nums[j]){
-                    x=1;
-                    break;
-                }
-
-            }
-            if(x==0) return nums[i];
+    int singleNumber(vector<int>& nums) {
+        if(nums.size()==1) return nums[0];
+        sort(nums.begin(), nums.end());
+        int i=0;
+        int j=1;
+        while(j<nums.size()){
+            if(nums[i]!=nums[j]) return nums[i];
+            i=i+2;
+            j=j+2;
         }
-        return 0;
+        return nums[i];
+        
     }
 };
