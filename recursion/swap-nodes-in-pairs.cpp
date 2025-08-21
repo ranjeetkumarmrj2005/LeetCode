@@ -35,7 +35,7 @@ public:
             temp=a;
            }
         }
-        a->next=c;
+       // a->next=c;
         return dummy->next;
         
     }
