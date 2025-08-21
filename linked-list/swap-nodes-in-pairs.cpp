@@ -15,7 +15,7 @@ public:
     }
 
     ListNode* swapPairs(ListNode* head) {
-        if(head==NULL && head->next==NULL) return head;
+        if(head==NULL || head->next==NULL) return head;
         ListNode* dummy=new ListNode(-1);
         ListNode* d1=dummy;
         ListNode* temp=head;
@@ -27,12 +27,15 @@ public:
             b=reverseList(a);
             d1->next=b;
             d1=a;
+           if(c && c->next){
             a->next=c;
             a=a->next;
             b=c->next;
-            if(c->next) c=c->next->next;
+            c=c->next->next;
             temp=a;
+           }
         }
+        a->next=c;
         return dummy->next;
         
     }
