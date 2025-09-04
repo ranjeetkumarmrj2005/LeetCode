@@ -4,15 +4,18 @@ public:
         stack<char>st;
         if(s.size()%2!=0) return false;
         if(s[0]==')' || s[0]==']' || s[0]=='}') return false;
+        int check=0;
         for(int i=0;i<s.size();i++){
             if(s[i]=='(' || s[i]=='[' || s[i]=='{'){
                 st.push(s[i]);
+                check++;
             }
             else {
                 if( (s[i]==')' && st.top()=='(') || (s[i]==']' && st.top()=='[') || (s[i]=='}' && st.top()=='{') ) st.pop();
                 else return false;
             }
         }
-        return true;
+        if(st.size()==0) return true;
+        else return false;
     }
 };
