@@ -1,37 +1,26 @@
-
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head,int* size) {
-    ListNode* CURR=head;
-    ListNode* PREV=NULL;
-    ListNode* NEXT=head;
-    while(CURR){
-        NEXT=NEXT->next;
-        CURR->next=PREV;
-        PREV=CURR;
-        CURR=NEXT;
-        (*size)++;
-    }
-    return PREV;
-    }
     vector<int> nextLargerNodes(ListNode* head) {
-        int size=0;
-        ListNode* newhead = reverseList(head,&size);
-        ListNode* temp=newhead->next;
-        vector<int>v(size,0);
-        stack<int>st;
-        st.push(newhead->val);
-        for(int i=1;i<size;i++){
-            while(st.size()>0 && temp->val>=st.top()){
-                st.pop();
-            }
-            if(st.size()==0) v[i]=0;
-            else v[i]=st.top();
-
-            st.push(temp->val);
+        ListNode* temp=head;
+        vector<int>copied_vector;
+        while(temp){
+            copied_vector.push_back(temp->val);
             temp=temp->next;
         }
-        reverse(v.begin(),v.end());
-        return v;
+        int n=copied_vector.size();
+
+        vector<int>ans_vector(n,0);
+        stack<int>st;
+        st.push(copied_vector[n-1]);
+        for(int i=n-2;i>=0;i--){
+            while(st.size()>0 && copied_vector[i]>=st.top()){
+                st.pop();
+            }
+            if(st.size()==0) ans_vector[i]=0;
+            else ans_vector[i]=st.top();
+
+            st.push(copied_vector[i]);
+        }
+        return ans_vector;
     }
 };
