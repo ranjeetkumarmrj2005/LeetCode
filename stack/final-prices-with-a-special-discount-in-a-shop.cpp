@@ -5,7 +5,7 @@ public:
         vector<int>ans(n,0);
         stack<int>st;
         for(int i=n-2;i>=0;i--){
-            while(st.size()>0 && prices[i]<st.top()){
+            while(st.size()>0 && st.top()>prices[i]){
                 st.pop();
             }
             if(st.size()==0) ans[i]=0;
