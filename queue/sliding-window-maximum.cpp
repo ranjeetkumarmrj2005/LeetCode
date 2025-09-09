@@ -4,14 +4,16 @@ public:
         if(k==1) return nums;
         vector<int>ans;
         int n=nums.size();
+        int i=0;
+        int j=k;
+        while(j<=n){
         int maximum=INT_MIN;
-        for(int i=0;i<k;i++){
-            maximum=max(maximum,nums[i]);
-        }
-        ans.push_back(maximum);
-        for(int i=k;i<n;i++){
-            maximum=max(maximum,nums[i]);
+            for(int l=i;l<j;l++){
+                maximum=max(maximum,nums[l]);
+            }
             ans.push_back(maximum);
+            i++;
+            j++;
         }
         return ans;
     }
