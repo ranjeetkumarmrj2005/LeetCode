@@ -1,0 +1,28 @@
+class Solution {
+public:
+    string reverse(string s){
+        string x="";
+        for(int i=s.size()-1;i>=0;i--){
+            x=x+s[i];
+        }
+        if(s!=x) return x;
+        else return "t";
+    }
+    int maximumNumberOfStringPairs(vector<string>& words) {
+        int n=words.size();
+        unordered_set<string>s;
+        int count=0;
+        for(string ele:words){
+            s.insert(ele);
+        }
+        for(int i=0;i<n;i++){
+            string str=reverse(words[i]);
+            if(s.find(str)!=s.end()) {
+                s.erase(words[i]);
+                s.erase(words[i]);
+                count++;
+            }
+        }
+        return count;
+    }
+};
