@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int pivoteidx=-1;
+        int pivot;
+        for(int i=nums.size()-2;i>=0;i--){
+            if(nums[i] < nums[i+1]){
+                pivoteidx=i;
+                pivot=nums[i];
+                break;
+            }
+        }
+        int check;
+        if(pivoteidx!=-1){
+            for(int i=pivoteidx+1;i<nums.size();i++){
+                if(nums[i]>pivot){
+                    check=i;
+                }
+            }
+            swap(nums[pivoteidx],nums[check]);
+            reverse(nums.begin()+pivoteidx+1,nums.end());
+            
+        }
+        else{
+            reverse(nums.begin(),nums.end());
+        }
+    }
+};
