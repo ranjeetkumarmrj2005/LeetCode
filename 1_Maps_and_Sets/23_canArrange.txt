@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool canArrange(vector<int>& arr, int k) {
+        int n=arr.size();
+        unordered_map<int,int>m;
+        vector<int>v;
+        for(int i=0;i<n;i++){
+            int rem=((arr[i]%k)+k)%k;
+            m[rem]++;
+        }
+        if(m.find(0)!=m.end()){
+            if(m[0]%2!=0) return false;
+            m.erase(0);
+        }
+        for(auto x:m){
+            int key=x.first;
+            int complement=k-key;
+            if(m.find(complement)==m.end())return false;
+            if(m[complement]!=m[key]) return false;
+        }
+        return true;
+    }
+};
