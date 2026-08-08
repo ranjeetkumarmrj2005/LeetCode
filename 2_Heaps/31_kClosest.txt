@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        vector<vector<int>>ans;
+        priority_queue< pair<int,vector<int>> >pq;
+        for(auto ele : points){
+            int x=ele[0];
+            int y=ele[1];
+            int sr=(x*x + y*y);
+            pq.push({sr,ele});
+            if(pq.size()>k) pq.pop();
+        }
+        while(pq.size()>0){
+            ans.push_back(pq.top().second);
+            pq.pop();
+        }
+        return ans;
+    }
+};
